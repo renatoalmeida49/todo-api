@@ -1,0 +1,24 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "Backend de aplicativo para gerenciamento de notas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renatoalmeida49/todo-api.git"
+  },
+  "keywords": [
+    "api",
+    "todo",
+    "node"
+  ],
+  "author": "Renato Novaes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renatoalmeida49/todo-api/issues"
+  },
+  "homepage": "https://github.com/renatoalmeida49/todo-api#readme"
+}
