@@ -7,6 +7,8 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({extend: false}))
 app.use(express.json())
 
+const rotaTodos = require('./routes/todos')
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header(
@@ -21,6 +23,8 @@ app.use((req, res, next) => {
 
     next()
 })
+
+app.use('/todos', rotaTodos)
 
 app.use((req, res, next) => {
     return res.status(200).send({
