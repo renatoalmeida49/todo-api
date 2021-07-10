@@ -35,8 +35,33 @@ exports.getId = (req, res, next) => {
 }
 
 exports.post = (req, res, next) => {
-    return res.status(200).send({
-        message: 'Rota post'
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error })}
+
+        conn.query(
+            `INSERT INTO tasks (title, created_at, updated_at, is_active) VALUES (?, ?, ?, ?)`,
+            [
+                req.body.title,
+                created_at = new Date(),
+                updated_at = new Date(),
+                is_active = 1
+            ],
+            (error, result, field) => {
+                conn.release()
+
+                if (error) { return res.status(500).send({ error: error })}
+
+                const response = {
+                    mensagem: "Nota inserida com sucesso",
+                    nota: {
+                        id: result.insertId,
+                        title: req.body.title
+                    }
+                }
+
+                return res.status(201).send(response)
+            }
+        )
     })
 }
 
