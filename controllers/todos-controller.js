@@ -66,8 +66,35 @@ exports.post = (req, res, next) => {
 }
 
 exports.patch = (req, res, next) => {
-    return res.status(200).send({
-        message: 'Rota patch'
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error })}
+
+        conn.query(
+            `UPDATE tasks
+                SET is_active = ?,
+                    updated_at = ?
+                WHERE id = ?`,
+            [
+                req.body.is_active = 0 ? 1 : 0,
+                updated_at = new Date(),
+                req.body.id
+            ],
+            (error, result, field) => {
+                conn.release()
+                
+                if (error) { return res.status(500).send({ error: error })}
+
+                const response = {
+                    mensagem: "Nota atualizada!",
+                    notaAtualizada: {
+                        id: req.body.id,
+                        is_active: req.body.is_active = 0 ? 1 : 0
+                    }
+                }
+
+                return res.status(200).send(response)
+            }
+        )
     })
 }
 
