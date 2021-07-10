@@ -92,14 +92,30 @@ exports.patch = (req, res, next) => {
                     }
                 }
 
-                return res.status(200).send(response)
+                return res.status(202).send(response)
             }
         )
     })
 }
 
 exports.delete = (req, res, next) => {
-    return res.status(200).send({
-        message: 'Rota delete'
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({ error: error })}
+
+        conn.query(
+            `DELETE FROM tasks WHERE id = ?`,
+            [req.body.id],
+            (error, resultado, field) => {
+                conn.release()
+
+                if (error) { return res.status(500).send({ error: error })}
+
+                const response = {
+                    mensagem: "Nota excluída"
+                }
+
+                return res.status(202).send(response)
+            }
+        )
     })
 }
