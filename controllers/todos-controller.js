@@ -7,6 +7,8 @@ exports.get = (req, res, next) => {
         conn.query(
             'SELECT * FROM tasks',
             (error, result, field) => {
+                conn.release()
+                
                 if (error) { return res.status(500).send({ error: error })}
 
                 const response = {
