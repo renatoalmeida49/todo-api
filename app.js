@@ -4,6 +4,12 @@ const cors = require('cors')
 const app = express()
 const morgan = require('morgan')
 
+const db = require('./models/index')
+db.sequelize.sync() // MODE PROD
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.")
+// }) // MODE DEV
+
 const rotaTodos = require('./routes/todos')
 
 app.use(morgan('dev'))

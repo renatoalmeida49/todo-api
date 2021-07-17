@@ -1,123 +1,94 @@
-const mysql = require('../mysql').pool
+const db = require('../models')
 
-exports.get = (req, res, next) => {
-    mysql.getConnection((error, conn) => {
-        if (error) { return res.status(500).send({ error: error })}
+console.log("Eesse é o db: ", db)
 
-        conn.query(
-            'SELECT * FROM tasks',
-            (error, result, field) => {
-                conn.release()
-                
-                if (error) { return res.status(500).send({ error: error })}
+const Task = db.task
+const Op = db.Sequelize.Op
 
-                const response = {
-                    totalTodos: result.length,
-                    todos: result.map(todo => {
-                        return {
-                            id: todo.id,
-                            title: todo.title,
-                            created_at: todo.created_at,
-                            updated_at: todo.updated_at,
-                            is_active: todo.is_active
-                        }
-                    })
-                }
+exports.create = (req, res) => {
+    if(!req.body.title) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        })
 
-                return res.status(200).send(response)
-            }
-        )
-    })
+        return
+    }
+
+    const task = {
+        title: req.body.title,
+        isActive: 1
+    }
+
+    Task.create(task)
+        .then(data => {
+            res.status(201).send({
+                message: "Task added",
+                data: data
+            })
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Internal erro while creating"
+            })
+        })
 }
 
-exports.getId = (req, res, next) => {
-    return res.status(200).send({
-        message: 'Rota getId'
-    })
+exports.findAll = (req, res) => {
+    Task.findAll()
+        .then(data => {
+            res.status(200).send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Internal erro reading taks"
+            })
+        })
 }
 
-exports.post = (req, res, next) => {
-    mysql.getConnection((error, conn) => {
-        if (error) { return res.status(500).send({ error: error })}
+exports.update = (req, res) => {
+    const id = req.body.id
 
-        conn.query(
-            `INSERT INTO tasks (title, created_at, updated_at, is_active) VALUES (?, ?, ?, ?)`,
-            [
-                req.body.title,
-                created_at = new Date(),
-                updated_at = new Date(),
-                is_active = 1
-            ],
-            (error, result, field) => {
-                conn.release()
+    const task = {
+        id: req.body.id,
+        isActive: req.body.isActive = 0 ? 1 : 0
+    }
 
-                if (error) { return res.status(500).send({ error: error })}
-
-                const response = {
-                    mensagem: "Nota inserida com sucesso",
-                    nota: {
-                        id: result.insertId,
-                        title: req.body.title
-                    }
-                }
-
-                return res.status(201).send(response)
-            }
-        )
+    Task.update(task, {
+        where: { id: id}
     })
+        .then(num => {
+            if(num == 1) {
+                res.status(202).send({
+                    message: "Updated sucessfully"
+                })
+            } else {
+                res.send({
+                    message: "Cannot update"
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error internal while update"
+            })
+        })
 }
 
-exports.patch = (req, res, next) => {
-    mysql.getConnection((error, conn) => {
-        if (error) { return res.status(500).send({ error: error })}
-
-        conn.query(
-            `UPDATE tasks
-                SET is_active = ?,
-                    updated_at = ?
-                WHERE id = ?`,
-            [
-                req.body.is_active = 0 ? 1 : 0,
-                updated_at = new Date(),
-                req.body.id
-            ],
-            (error, result, field) => {
-                conn.release()
-                
-                if (error) { return res.status(500).send({ error: error })}
-
-                const response = {
-                    mensagem: "Nota atualizada!",
-                    notaAtualizada: {
-                        id: req.body.id,
-                        is_active: req.body.is_active = 0 ? 1 : 0
-                    }
-                }
-
-                return res.status(202).send(response)
-            }
-        )
-    })
-}
-
-exports.delete = (req, res, next) => {
-    mysql.getConnection((error, conn) => {
-        if (error) { return res.status(500).send({ error: error })}
-
-        conn.query(
-            `DELETE FROM tasks WHERE id = ?`,
-            [req.body.id],
-            (error, resultado, field) => {
-                conn.release()
-
-                if (error) { return res.status(500).send({ error: error })}
-
-                const response = {
-                    mensagem: "Nota excluída"
-                }
-
-                return res.status(202).send(response)
-            }
-        )
-    })
+exports.delete = (req, res) => {
+    Task.findByPk(req.body.id)
+        .then(data => {
+            data.destroy()
+        })
+        .then(num => {
+            res.status(202).send({
+                message: "Deleted",
+                data: num
+            })
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Interal error",
+                err: err
+            })
+        })
 }
