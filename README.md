@@ -2,7 +2,7 @@
   
 This is a complement of a challenge from [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW/hub/todo-app-zbIroaSC9). Here you can store your todo notes in a very easy and intuitive way.  
 
-## The challenge
+## :bangbang: The challenge
 
 I've started to work with Frontend development and I really would like to make my first step to understand and be able to build something in the backend development.  
   
@@ -12,21 +12,21 @@ This challenge was the perfect oportunity for me.
   
 [Todo-app-api](https://rest-api-todo-main.herokuapp.com/)  
 
-### Build with
+### :pBuild with
 
 * NodeJs
 * Express
 * Sequelize
 
-## Routes
+## :left_right_arrow: Routes
 
 The API only have one endpoint. The difference in responses will depende of the method and the payload you send to it.
 
-``` [YOUR-HOST]/todos/ ```
+> [YOUR-HOST]/todos/
 
 
 
-* GET
+:large_blue_circle: GET
 
 Here you have an example of response. The 0 in ```isActive``` stands for a completed task. 1 means it's a task still not finished.
 
@@ -52,7 +52,7 @@ Here you have an example of response. The 0 in ```isActive``` stands for a compl
 ]
 ```
 
-* POST
+:large_blue_circle: POST
 
 You just have to send a title to the API. The other fields will be filled by the backend.
 
@@ -62,7 +62,7 @@ You just have to send a title to the API. The other fields will be filled by the
 }
 ```
 
-* PATCH
+:large_blue_circle: PATCH
 
 For update the note, the only thing it will change will be the ```isActive``` field. It will toggle between 1 and 0. For that you just need to send the ```id``` of the note you want to change.
 
@@ -72,7 +72,7 @@ For update the note, the only thing it will change will be the ```isActive``` fi
 }
 ```
 
-* DELETE
+:large_blue_circle: DELETE
 
 The ```id``` it's the only thing necessary to delete the note. 
 
@@ -82,19 +82,20 @@ The ```id``` it's the only thing necessary to delete the note.
 }
 ```
 
-## TODO  
+## :satellite: TODO  
   
 :white_medium_square: A better error handling on server side  
 :white_check_mark: Documentation of the API    
   
-## Author  
+## :smile: Author  
   
 * Renato Novaes  
 * [Website](https://www.renatonovaes.dev)
 * [Linkedin](https://www.linkedin/in/renatonovaes49)
 * [Instagram](https://www.instagram/novaes_r)
 
-## Acknowledgments  
+## :clap: Acknowledgments  
   
-* Rafael Rodrigues - My boss, coworker and friend. The one who told me to learn Node and offered all the help along the way.  
-* Gabriel Luz - My coworker and friend. He gave me very detailed explanations about how to build and set everything up. Besides helped me with some errors and bugs during the development.
+* **Rafael Rodrigues** - My boss, coworker and friend. The one who told me to learn Node and offered all the help along the way.   
+ 
+* **Gabriel Luz** - My coworker and friend. He gave me very detailed explanations about how to build and set everything up. Besides helped me with some errors and bugs during the development.
