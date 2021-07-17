@@ -2,6 +2,8 @@
   
 This is a complement of a challenge from [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW/hub/todo-app-zbIroaSC9). Here you can store your todo notes in a very easy and intuitive way.  
 
+You can check the Frontend of this project [here](https://github.com/renatoalmeida49/todo-app-challenge)
+
 ## :bangbang: The challenge
 
 I've started to work with Frontend development and I really would like to make my first step to understand and be able to build something in the backend development.  
