@@ -14,11 +14,21 @@ This challenge was the perfect oportunity for me.
   
 [Todo-app-api](https://rest-api-todo-main.herokuapp.com/)  
 
-### :pBuild with
+### Build with
 
 * NodeJs
 * Express
-* Sequelize
+* Sequelize  
+
+## :arrow_forward: How to run the project
+
+1. Clone this repository in your machine
+2. Create a new database in your SGDB
+3. Make a copy of the file ```nodemon.base.json```
+4. Rename it to ```nodemon.json```
+5. Fill the environment variables to access the database you've just created
+6. Execute ```npm install``` to install all dependecies 
+7. In your terminal execute the comand ```npm start```
 
 ## :left_right_arrow: Routes
 
