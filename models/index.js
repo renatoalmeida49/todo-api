@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
-    dialect: 'mysql',
-    host: process.env.MYSQL_HOST,
+const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+    dialect: process.env.DB_DRIVER,
+    host: process.env.DB_HOST,
 })
 
 const db = {}
@@ -9,6 +9,6 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.task = require('./task-model')(sequelize, Sequelize)
+db.tasks = require('./task-model')(sequelize, Sequelize)
 
 module.exports = db

@@ -1,9 +1,6 @@
 const db = require('../models')
 
-console.log("Eesse é o db: ", db)
-
-const Task = db.task
-const Op = db.Sequelize.Op
+const Task = db.tasks
 
 exports.create = (req, res) => {
     if(!req.body.title) {
@@ -50,7 +47,7 @@ exports.update = (req, res) => {
 
     const task = {
         id: req.body.id,
-        isActive: req.body.isActive = 0 ? 1 : 0
+        isActive: req.body.isActive == 0 ? 1 : 0
     }
 
     Task.update(task, {

@@ -1,10 +1,11 @@
 {
     "env": {
-        "MYSQL_USER": "",
-        "MYSQL_PASSWORD": "",
-        "MYSQL_DATABASE": "",
-        "MYSQL_HOST": "",
-        "MYSQL_PORT": 0,
+        "BD_DRIVER": "",
+        "BD_USER": "",
+        "BD_PASSWORD": "",
+        "BD_DATABASE": "",
+        "BD_HOST": "",
+        "BD_PORT": 0,
 
         "JWT_KEY": ""
     }
